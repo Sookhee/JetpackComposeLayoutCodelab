@@ -12,6 +12,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -27,46 +31,93 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetpackComposeLayoutCodelabTheme {
-                PhotographerCard()
+                LayoutsCodelab()
             }
         }
     }
+}
 
-    @Composable
-    fun PhotographerCard() {
-        Row(
-            modifier = Modifier
-                .padding(8.dp)
-                .clip(RoundedCornerShape(4.dp))
-                .background(MaterialTheme.colors.surface)
-                .clickable(onClick = {})
-                .padding(16.dp)
-        ) {
-            Surface(
-                modifier = Modifier.size(50.dp),
-                shape = CircleShape,
-                color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f)
-            ) {
+@Composable
+fun LayoutsCodelab() {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = "LayoutsCodelab")
+                },
+                actions = {
+                    IconButton(onClick = {}) {
+                        Icon(Icons.Filled.Favorite, contentDescription = null)
+                    }
 
-            }
-            Column(
-                modifier = Modifier
-                    .padding(start = 8.dp)
-                    .align(Alignment.CenterVertically)
-            ) {
-                Text("Alfred Sisley", fontWeight = FontWeight.Bold)
-                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                    Text("3 minutes ago", style = MaterialTheme.typography.body2)
+                    IconButton(onClick = {}) {
+                        Icon(Icons.Filled.Menu, contentDescription = null)
+                    }
+
+                    IconButton(onClick = {}) {
+                        Icon(Icons.Filled.VerifiedUser, contentDescription = null)
+                    }
                 }
+            )
+        }
+    ) { innerPadding ->
+        Column(modifier = Modifier.padding((innerPadding))) {
+            BodyContent(Modifier.padding(innerPadding).padding(8.dp))
+        }
+    }
+}
+
+@Composable
+fun BodyContent(modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Text("Hi there!")
+        Text("Thanks for going through the Layouts codelab")
+
+    }
+}
+
+@Preview
+@Composable
+fun LayoutsCodelabPreview() {
+    JetpackComposeLayoutCodelabTheme {
+        LayoutsCodelab()
+    }
+}
+
+@Composable
+fun PhotographerCard() {
+    Row(
+        modifier = Modifier
+            .padding(8.dp)
+            .clip(RoundedCornerShape(4.dp))
+            .background(MaterialTheme.colors.surface)
+            .clickable(onClick = {})
+            .padding(16.dp)
+    ) {
+        Surface(
+            modifier = Modifier.size(50.dp),
+            shape = CircleShape,
+            color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f)
+        ) {
+
+        }
+        Column(
+            modifier = Modifier
+                .padding(start = 8.dp)
+                .align(Alignment.CenterVertically)
+        ) {
+            Text("Alfred Sisley", fontWeight = FontWeight.Bold)
+            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                Text("3 minutes ago", style = MaterialTheme.typography.body2)
             }
         }
     }
+}
 
-    @Preview
-    @Composable
-    fun PhotographerCardPreview() {
-        JetpackComposeLayoutCodelabTheme {
-            PhotographerCard()
-        }
+@Preview
+@Composable
+fun PhotographerCardPreview() {
+    JetpackComposeLayoutCodelabTheme {
+        PhotographerCard()
     }
 }
